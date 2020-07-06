@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a R, RStudio y Bioconductor</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Leonardo Collado-Torres" />
+    <meta name="date" content="2020-07-06" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <strong>Introducción a R, RStudio y Bioconductor</strong>
+## para expandir tu horizonte bioinformático CDSB + RMB + NNB + EMB 2020
+### <a href="http://lcolladotor.github.io/">Leonardo Collado-Torres</a>
+### 2020-07-06
+
+---
+
+
+
+
+
+
+class: inverse
+
+.center[
+
+&lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;&lt;img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /&gt;&lt;/a&gt;&lt;br /&gt;This work is licensed under a &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License&lt;/a&gt;.
+
+[&lt;img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/TIF-Logo_2020.png" width="250px" /&gt;](http://www.nnb.unam.mx/TIB2020/)
+
+[&lt;img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/RMB_Logo-horizontal.png" width="250px" /&gt;](https://www.redmexicanadebioinformatica.org/)
+
+[&lt;img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/logo-principal.png" width="250px" /&gt;](http://www.nnb.unam.mx/)
+
+[&lt;img src="https://comunidadbioinfo.github.io/images/logo_hu887f29129fe527571c16cff89573bbf0_57814_0x70_resize_lanczos_2.png" width = "250px" /&gt;](https://comunidadbioinfo.github.io/)
+
+]
+
+.footnote[ Descarga los archivos de este curso con `usethis::use_course('lcolladotor/RBiocIntro2020')` o ve los archivos en línea a través de [**lcolladotor.github.io/RBiocIntro2020**](http://lcolladotor.github.io/RBiocIntro2020).]
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+/* From https://github.com/yihui/xaringan/wiki/Font-Size */
+.tiny{
+  font-size: 40%
+}
+&lt;/style&gt;
+
+
+---
+
+# R
+
+
+* Es gratis, fácil de expander y muy versátil
+
+--
+
+* Nace en la academia y existe gracias a muchxs voluntarixs
+
+--
+
+* Lo puedes instalar a través de [CRAN](https://cran.r-project.org/)
+
+--
+
+* Cambia de versión en abril cada año. Versión más reciente: 4.0.2
+
+.footnote[
+También existen imágenes de docker como las de [Rocker](https://www.rocker-project.org/) y de [Bioconductor](https://www.bioconductor.org/help/docker/).
+]
+
+
+
+---
+
+# RStudio
+
+
+* Mezcla de productos gratis y privados: modelo ecónomico para impulsar el código de acceso libre
+
+--
+
+* RStudio Desktop: permite escribir trabajar con R de forma más eficiente
+
+--
+
+* Desarrollan código (paquetes) para el beneficio de todxs
+
+--
+
+* Puedes descargar RStudio Desktop desde [aquí](https://rstudio.com/products/rstudio/download/)
+
+--
+
+* ¡Cambia de versión seguido!
+
+.footnote[
+Chequen la excelente plática de JJ Allaire [Open Source Software for Data Science](https://rstudio.com/resources/rstudioconf-2020/open-source-software-for-data-science/) sobre RStudio.
+]
+
+
+---
+
+# Bioconductor
+
+* [CRAN](https://cran.r-project.org/) task views: listas curadas de paquetes (📦s) de R
+
+--
+
+* Bioconductor: hogar (repositorio) de código de R (📦s) para analizar datos biológicos masivos (bioinformática); cerca de 2 mil 📦s
+
+--
+
+* Fue fundado por [Robert Gentleman](https://www.linkedin.com/in/robert-gentleman-06845098/) (co-creador de R junto con [Ross Ihaka](https://en.wikipedia.org/wiki/Ross_Ihaka))
+
+--
+
+* Los 📦s tienen que ser de _alta_ calidad: pasar pruebas continuas en macOS, Windows, linux; documentación; seguir ciertos estándares de programación
+
+.footnote[
+[Foto de latinxs con Robert en 2019](https://twitter.com/fellgernon/status/1144298692775698438?s=20)
+]
+
+
+---
+
+# ¿Qué hay en común a través de R, RStudio y Bioconductor?
+
+--
+
+* ¡Todxs nosotrxs! La comunidad
+
+--
+
+* Nadie es un expertx: siempre hay otras personas de quien aprender
+
+--
+
+* Recuerden: es un esfuerzo de muchxs voluntarixs. Hay que ayudar a que nos ayuden.
+
+--
+
+* Al usar algún paquete de R te vuelves parte de la comunidad: ¡todxs buscan que sigas siendo parte de ella!
+
+
+.footnote[
+Jenny Bryan tiene varias pláticas buenas al respecto. Empiezen por [Object of type ‘closure’ is not subsettable](https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/).
+]
+
+---
+
+# Pedir ayuda
+
+* [RStudio Community](https://community.rstudio.com/t/compiler-support-fo-c-14-features-on-windows/57284/4?u=lcolladotor)
+* [Bioconductor Support](https://support.bioconductor.org/p/116480/)
+* GitHub [issues](https://github.com/rocker-org/rocker-versioned2/issues/50) y [pull requests](https://github.com/rocker-org/rocker-versioned2/pull/51)
+* [Twitter vía rstats y rstatsES](https://twitter.com/fellgernon/status/1253502433231343617?s=20)
+* Slack: [Bioconductor](https://bioc-community.herokuapp.com/), [RLadies](https://rladies-community-slack.herokuapp.com/), ...
+* Listas de email de R: [Bioconductor](https://stat.ethz.ch/mailman/listinfo/bioc-devel), [R-Sig-Mac](https://stat.ethz.ch/mailman/listinfo/r-sig-mac), ...
+
+Más:
+
+* [MiR](https://twitter.com/miR_community)
+* [R LGBTQ+](https://twitter.com/R_LGBTQ)
+* [R4DS Community](https://twitter.com/R4DScommunity)
+* y muchas más
+
+En español
+
+* [CDSB](https://comunidadbioinfo.github.io/)
+* [Mapa de RLadies](https://benubah.github.io/r-community-explorer/rladies.html)
+* [LatinR](https://twitter.com/latinr_conf) (y portugués)
+
+---
+
+&lt;iframe src="https://giphy.com/embed/yoJC2ysogWRNyIafZe" width="480" height="253" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/wetv-yaas-yoJC2ysogWRNyIafZe"&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+
+---
+
+# Bioconductor: en detalle
+
+--
+
+* __Bioconductor, the R package repository for the "analysis and comprehension of high-throughput genomic data"__
+
+--
+
+* blog 2014: [Where do I start using Bioconductor?](http://lcolladotor.github.io/2014/10/16/startbioc/#.XqxNGRNKiuo)
+
+--
+
+* [Sobre Bioconductor](http://bioconductor.org/about/)
+
+--
+
+* Artículos: [2004](http://genomebiology.com/content/pdf/gb-2004-5-10-r80.pdf), libro [2005](https://www.amazon.com/Bioinformatics-Computational-Solutions-Bioconductor-Statistics/dp/0387251464), [2015](http://www.nature.com/nmeth/journal/v12/n2/abs/nmeth.3252.html)
+
+--
+
+* Equipos de trabajo: [core team](http://bioconductor.org/about/core-team/);  _Advisory Boards_: [_Scientific_](http://bioconductor.org/about/scientific-advisory-board/), [_Technical_](http://bioconductor.org/about/technical-advisory-board/), [_Community_](http://bioconductor.org/about/community-advisory-board/)
+
+---
+
+# Tipos de paquetes
+
+* _Software_: principal tipo de 📦, principalmente hecho por la comunidad
+* _Annotation_: facilita el interactuar con bases de datos genómicas
+makes it easier to interface with heavily used genomics databases
+* _Experiment Data_: típicamente relacionado a un artículo o para distribuir datos para ejemplos, principalmente hecho por la comunidad
+* _Workflows_: muestran como usar varios paquetes de R/BioC para un tipo de análisis en particular
+
+
+
+---
+
+# Buscar paquetes
+
+* Software: http://bioconductor.org/packages/release/bioc/
+* Annotation: http://bioconductor.org/packages/release/data/annotation/
+* Experiment Data: http://bioconductor.org/packages/release/data/experiment/
+* Workflows: http://bioconductor.org/packages/release/workflows/
+
+
+---
+
+# Navegando los _biocViews_
+
+* Estructura como de un árbol
+* Cuatro árboles principales: software, annotation, experiment, workflow
+* Un paquete puede ser parte de varias ramas del mismo árbol
+* Búsqueda de texto sencilla
+* Ejemplo: Software → WorkflowStep → Visualization → http://bioconductor.org/packages/release/BiocViews.html#___Visualization (486 📦s en BioC 3.11)
+
+
+---
+
+# Ejercicio 1
+
+* Encuentren un paquete para analizar uso diferencial de exones (tiene que ver con _splicing_)
+* ¿Cúal es el 📦 de datos de organismo de humano más usado?
+* ¿Cúantos _workflows_ básicos hay?
+
+---
+
+# Página web principal de un 📦 de BioC
+
+* Usen https://bioconductor.org/packages/&lt;pkg_name&gt;.
+  - Ejemplo 1: https://bioconductor.org/packages/recount
+  - Ejemplo 2: https://bioconductor.org/packages/SummarizedExperiment
+* Etiquetas (badges): muestra rápidamente como está el 📦
+* Descripción: un párrafo
+* Cómo citar el 📦
+* Cómo instalar el 📦. Más detalles en http://bioconductor.org/install/
+* Documentación
+  - Liga al PDF o HTML para cada _vignette_. ¡Es la información **PRINCIPAL** que van a querer revisar!
+  - Es donde lxs autores explican cómo se relacionan las diferentes funciones y para que sirve el 📦.
+  
+---
+
+* Detalles
+  - términos de _biocViews_
+  - Relación con otros 📦s (depends, imports, linking to, suggests, depends on me, …)
+  - URL: donde puedes encontrar el código fuente
+  - BugReports: donde puedes pedir ayuda
+* Más detalles sobre la instalación del 📦
+* Estadísticas sobre las descargas
+
+---
+
+# Ejercicio 2
+
+* ¿Cúantas vignettes tiene _recount_?
+* Si tienen una pregunta sobre _recount_, ¿dónde pedirían ayuda?
+* _recount_ depende de otro 📦 de R, ¿cúal es, qué tan usado es? ¿Funciona en todos los sistemas operativos?
+
+---
+
+# Dos ramas (versiones) de Bioconductor
+
+* Ramas:
+  - release (versión principal), actualmente: 3.11
+  - devel (desarrollo), actualmente: 3.12
+    * Ejemplo: http://bioconductor.org/packages/devel/bioc/html/recount.html
+* Bioconductor: ciclos de 6 meses (abril y octubre)
+* Pruebas diarias en Windows, Linux y macOS en ambas ramas
+  - Ejemplo: http://bioconductor.org/checkResults/release/bioc-LATEST/recount/ y http://bioconductor.org/checkResults/devel/bioc-LATEST/recount/
+* Resumen de cada versión, actualmente 3.11: http://bioconductor.org/news/bioc_3_11_release/
+  - Resumen del resumen para 3.8: http://research.libd.org/rstatsclub/2018/11/02/quick-overview-on-the-new-bioconductor-3-8-release/
+
+---
+
+# Cursos y eventos
+
+* http://bioconductor.org/help/events/
+* http://bioconductor.org/help/course-materials/
+* BioC2020: congreso principal (será remoto este año) https://bioc2020.bioconductor.org/
+  - BioC2019 libro de los talleres: https://rebrand.ly/biocworkshops2019
+* Taller CDSB 2020: https://comunidadbioinfo.github.io/post/cdsb2020-building-workflows-with-rstudio-and-scrnaseq-with-bioconductor/#.XmJT-Z-YU1I
+  - Más sobre la CDSB a través de R Consortium: [inglés](https://www.r-consortium.org/blog/2020/03/18/cdsb-diversity-and-outreach-hotspot-in-mexico) y [español](https://comunidadbioinfo.github.io/es/post/csdb-story-of-a-diversity-and-outreach-hotspot-in-mexico/#.XwM5CpNKiuo)
+
+---
+
+# Desarrolladores
+
+https://bioconductor.org/developers/
+
+* Lista de correos para los desarrolladores
+* Git, GitHub y control de código
+* Guías/reglas para código de R
+* Contenedores de Docker
+* Amazon Machine Image
+
+---
+
+# ¿Quieren más?
+
+.scroll-output[
+.tiny[
+
+&lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;Are you interested in learning about storing &lt;a href="https://twitter.com/hashtag/genomics?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#genomics&lt;/a&gt; data using &lt;a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw"&gt;@Bioconductor&lt;/a&gt;? &lt;br&gt;&lt;br&gt;Leo &lt;a href="https://twitter.com/fellgernon?ref_src=twsrc%5Etfw"&gt;@fellgernon&lt;/a&gt; explained what &lt;a href="https://twitter.com/hashtag/SummarizedExperiment?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#SummarizedExperiment&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/SingleCellExperiment?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#SingleCellExperiment&lt;/a&gt; and related &lt;a href="https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rstats&lt;/a&gt; 📦s can do for you&lt;br&gt;&lt;br&gt;📹 &lt;a href="https://t.co/dMm2fESP1Y"&gt;https://t.co/dMm2fESP1Y&lt;/a&gt;&lt;br&gt;📒 &lt;a href="https://t.co/UQl3JqZ2Cy"&gt;https://t.co/UQl3JqZ2Cy&lt;/a&gt;&lt;br&gt;📜 &lt;a href="https://t.co/D2y6OyDuwg"&gt;https://t.co/D2y6OyDuwg&lt;/a&gt; &lt;a href="https://t.co/eXVeEISxFD"&gt;pic.twitter.com/eXVeEISxFD&lt;/a&gt;&lt;/p&gt;&amp;mdash; LIBD rstats club (@LIBDrstats) &lt;a href="https://twitter.com/LIBDrstats/status/1261387752588935169?ref_src=twsrc%5Etfw"&gt;May 15, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+]]
+
+---
+
+&lt;iframe src="https://giphy.com/embed/KYDYyfxefrS2eiKBuv" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/thanks-thank-you-respect-KYDYyfxefrS2eiKBuv"&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+
+---
+
+class: middle
+
+.center[
+
+# ¡Gracias!
+
+Las diapositivas fueron hechas con el paquete de R [**xaringan**](https://github.com/yihui/xaringan) y estilizadas con [**xaringanthemer**](https://github.com/gadenbuie/xaringanthemer).
+
+
+
+
+Instructor: [**Leonardo Collado-Torres**](http://lcolladotor.github.io/).
+
+&lt;a href="https://www.libd.org"&gt;&lt;img src="img/LIBD_logo.jpg" style="width: 20%" /&gt;&lt;/a&gt;
+
+]
+
+.footnote[ Descarga los archivos de este curso con `usethis::use_course('lcolladotor/RBiocIntro2020')` o ve los archivos en línea a través de [**lcolladotor.github.io/RBiocIntro2020**](http://lcolladotor.github.io/RBiocIntro2020).]
+---
+
+Este mini curso está basado en 
+
+&lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;For our session today Leo &lt;a href="https://twitter.com/fellgernon?ref_src=twsrc%5Etfw"&gt;@fellgernon&lt;/a&gt; did a &lt;a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw"&gt;@Bioconductor&lt;/a&gt; overview for &lt;a href="https://twitter.com/LieberInstitute?ref_src=twsrc%5Etfw"&gt;@LieberInstitute&lt;/a&gt;&lt;br&gt;&lt;br&gt;📜 &lt;a href="https://t.co/51DE9Cqk2a"&gt;https://t.co/51DE9Cqk2a&lt;/a&gt;&lt;br&gt;📹 &lt;a href="https://t.co/acfMoJFqvH"&gt;https://t.co/acfMoJFqvH&lt;/a&gt;&lt;br&gt;🌐 &lt;a href="https://t.co/CHROt662as"&gt;https://t.co/CHROt662as&lt;/a&gt;&lt;br&gt;&lt;br&gt;Leo joined the Community Advisory Board 🌟 in 04/2020&lt;a href="https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rstats&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/Bioinformatics?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#Bioinformatics&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/Genomics?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#Genomics&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/Bioconductor?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#Bioconductor&lt;/a&gt;&lt;/p&gt;&amp;mdash; LIBD rstats club (@LIBDrstats) &lt;a href="https://twitter.com/LIBDrstats/status/1256289003889983488?ref_src=twsrc%5Etfw"&gt;May 1, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+
+---
+
+# Información de la sesión de R
+
+
+.scroll-output[
+.tiny[
+
+
+```r
+options(width = 120)
+sessioninfo::session_info()
+```
+
+```
+## ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
+##  setting  value                       
+##  version  R version 4.0.0 (2020-04-24)
+##  os       macOS Catalina 10.15.5      
+##  system   x86_64, darwin17.0          
+##  ui       X11                         
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  ctype    en_US.UTF-8                 
+##  tz       America/New_York            
+##  date     2020-07-06                  
+## 
+## ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+##  package        * version  date       lib source                            
+##  assertthat       0.2.1    2019-03-21 [1] CRAN (R 4.0.0)                    
+##  cli              2.0.2    2020-02-28 [1] CRAN (R 4.0.0)                    
+##  colorout       * 1.2-2    2020-03-16 [1] Github (jalvesaq/colorout@726d681)
+##  crayon           1.3.4    2017-09-16 [1] CRAN (R 4.0.0)                    
+##  digest           0.6.25   2020-02-23 [1] CRAN (R 4.0.0)                    
+##  evaluate         0.14     2019-05-28 [1] CRAN (R 4.0.0)                    
+##  fansi            0.4.1    2020-01-08 [1] CRAN (R 4.0.0)                    
+##  glue             1.4.1    2020-05-13 [1] CRAN (R 4.0.0)                    
+##  htmltools        0.4.0    2019-10-04 [1] CRAN (R 4.0.0)                    
+##  knitr            1.29     2020-06-23 [1] CRAN (R 4.0.0)                    
+##  magrittr         1.5      2014-11-22 [1] CRAN (R 4.0.0)                    
+##  purrr            0.3.4    2020-04-17 [1] CRAN (R 4.0.0)                    
+##  Rcpp             1.0.4.12 2020-06-26 [1] Github (RcppCore/Rcpp@653b4ae)    
+##  rlang            0.4.6    2020-05-02 [1] CRAN (R 4.0.0)                    
+##  rmarkdown        2.3      2020-06-18 [1] CRAN (R 4.0.0)                    
+##  sessioninfo      1.1.1    2018-11-05 [1] CRAN (R 4.0.0)                    
+##  showtext         0.7-1    2020-01-27 [1] CRAN (R 4.0.0)                    
+##  showtextdb       2.0      2017-09-11 [1] CRAN (R 4.0.0)                    
+##  stringi          1.4.6    2020-02-17 [1] CRAN (R 4.0.0)                    
+##  stringr          1.4.0    2019-02-10 [1] CRAN (R 4.0.0)                    
+##  sysfonts         0.8.1    2020-05-08 [1] CRAN (R 4.0.0)                    
+##  whisker          0.4      2019-08-28 [1] CRAN (R 4.0.0)                    
+##  withr            2.2.0    2020-04-20 [1] CRAN (R 4.0.0)                    
+##  xaringan         0.16     2020-03-31 [1] CRAN (R 4.0.0)                    
+##  xaringanthemer * 0.3.0    2020-05-04 [1] CRAN (R 4.0.0)                    
+##  xfun             0.15     2020-06-21 [1] CRAN (R 4.0.0)                    
+##  yaml             2.2.1    2020-02-01 [1] CRAN (R 4.0.0)                    
+## 
+## [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library
+```
+
+
+]]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,386 @@
+---
+title: "**Introducción a R, RStudio y Bioconductor**"
+subtitle: "para expandir tu horizonte bioinformático CDSB + RMB + NNB + EMB 2020"  
+author: "[Leonardo Collado-Torres](http://lcolladotor.github.io/)"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+solarized_dark(
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+)
+```
+
+class: inverse
+
+.center[
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+[<img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/TIF-Logo_2020.png" width="250px" />](http://www.nnb.unam.mx/TIB2020/)
+
+[<img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/RMB_Logo-horizontal.png" width="250px" />](https://www.redmexicanadebioinformatica.org/)
+
+[<img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/logo-principal.png" width="250px" />](http://www.nnb.unam.mx/)
+
+[<img src="https://comunidadbioinfo.github.io/images/logo_hu887f29129fe527571c16cff89573bbf0_57814_0x70_resize_lanczos_2.png" width = "250px" />](https://comunidadbioinfo.github.io/)
+
+]
+
+.footnote[ Descarga los archivos de este curso con `usethis::use_course('lcolladotor/RBiocIntro2020')` o ve los archivos en línea a través de [**lcolladotor.github.io/RBiocIntro2020**](http://lcolladotor.github.io/RBiocIntro2020).]
+
+```{css, echo = FALSE}
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+/* From https://github.com/yihui/xaringan/wiki/Font-Size */
+.tiny{
+  font-size: 40%
+}
+```
+
+
+---
+
+# R
+
+
+* Es gratis, fácil de expander y muy versátil
+
+--
+
+* Nace en la academia y existe gracias a muchxs voluntarixs
+
+--
+
+* Lo puedes instalar a través de [CRAN](https://cran.r-project.org/)
+
+--
+
+* Cambia de versión en abril cada año. Versión más reciente: 4.0.2
+
+.footnote[
+También existen imágenes de docker como las de [Rocker](https://www.rocker-project.org/) y de [Bioconductor](https://www.bioconductor.org/help/docker/).
+]
+
+
+
+---
+
+# RStudio
+
+
+* Mezcla de productos gratis y privados: modelo ecónomico para impulsar el código de acceso libre
+
+--
+
+* RStudio Desktop: permite escribir trabajar con R de forma más eficiente
+
+--
+
+* Desarrollan código (paquetes) para el beneficio de todxs
+
+--
+
+* Puedes descargar RStudio Desktop desde [aquí](https://rstudio.com/products/rstudio/download/)
+
+--
+
+* ¡Cambia de versión seguido!
+
+.footnote[
+Chequen la excelente plática de JJ Allaire [Open Source Software for Data Science](https://rstudio.com/resources/rstudioconf-2020/open-source-software-for-data-science/) sobre RStudio.
+]
+
+
+---
+
+# Bioconductor
+
+* [CRAN](https://cran.r-project.org/) task views: listas curadas de paquetes (📦s) de R
+
+--
+
+* Bioconductor: hogar (repositorio) de código de R (📦s) para analizar datos biológicos masivos (bioinformática); cerca de 2 mil 📦s
+
+--
+
+* Fue fundado por [Robert Gentleman](https://www.linkedin.com/in/robert-gentleman-06845098/) (co-creador de R junto con [Ross Ihaka](https://en.wikipedia.org/wiki/Ross_Ihaka))
+
+--
+
+* Los 📦s tienen que ser de _alta_ calidad: pasar pruebas continuas en macOS, Windows, linux; documentación; seguir ciertos estándares de programación
+
+.footnote[
+[Foto de latinxs con Robert en 2019](https://twitter.com/fellgernon/status/1144298692775698438?s=20)
+]
+
+
+---
+
+# ¿Qué hay en común a través de R, RStudio y Bioconductor?
+
+--
+
+* ¡Todxs nosotrxs! La comunidad
+
+--
+
+* Nadie es un expertx: siempre hay otras personas de quien aprender
+
+--
+
+* Recuerden: es un esfuerzo de muchxs voluntarixs. Hay que ayudar a que nos ayuden.
+
+--
+
+* Al usar algún paquete de R te vuelves parte de la comunidad: ¡todxs buscan que sigas siendo parte de ella!
+
+
+.footnote[
+Jenny Bryan tiene varias pláticas buenas al respecto. Empiezen por [Object of type ‘closure’ is not subsettable](https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/).
+]
+
+---
+
+# Pedir ayuda
+
+* [RStudio Community](https://community.rstudio.com/t/compiler-support-fo-c-14-features-on-windows/57284/4?u=lcolladotor)
+* [Bioconductor Support](https://support.bioconductor.org/p/116480/)
+* GitHub [issues](https://github.com/rocker-org/rocker-versioned2/issues/50) y [pull requests](https://github.com/rocker-org/rocker-versioned2/pull/51)
+* [Twitter vía rstats y rstatsES](https://twitter.com/fellgernon/status/1253502433231343617?s=20)
+* Slack: [Bioconductor](https://bioc-community.herokuapp.com/), [RLadies](https://rladies-community-slack.herokuapp.com/), ...
+* Listas de email de R: [Bioconductor](https://stat.ethz.ch/mailman/listinfo/bioc-devel), [R-Sig-Mac](https://stat.ethz.ch/mailman/listinfo/r-sig-mac), ...
+
+Más:
+
+* [MiR](https://twitter.com/miR_community)
+* [R LGBTQ+](https://twitter.com/R_LGBTQ)
+* [R4DS Community](https://twitter.com/R4DScommunity)
+* y muchas más
+
+En español
+
+* [CDSB](https://comunidadbioinfo.github.io/)
+* [Mapa de RLadies](https://benubah.github.io/r-community-explorer/rladies.html)
+* [LatinR](https://twitter.com/latinr_conf) (y portugués)
+
+---
+
+<iframe src="https://giphy.com/embed/yoJC2ysogWRNyIafZe" width="480" height="253" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/wetv-yaas-yoJC2ysogWRNyIafZe">via GIPHY</a></p>
+
+---
+
+# Bioconductor: en detalle
+
+--
+
+* __Bioconductor, the R package repository for the "analysis and comprehension of high-throughput genomic data"__
+
+--
+
+* blog 2014: [Where do I start using Bioconductor?](http://lcolladotor.github.io/2014/10/16/startbioc/#.XqxNGRNKiuo)
+
+--
+
+* [Sobre Bioconductor](http://bioconductor.org/about/)
+
+--
+
+* Artículos: [2004](http://genomebiology.com/content/pdf/gb-2004-5-10-r80.pdf), libro [2005](https://www.amazon.com/Bioinformatics-Computational-Solutions-Bioconductor-Statistics/dp/0387251464), [2015](http://www.nature.com/nmeth/journal/v12/n2/abs/nmeth.3252.html)
+
+--
+
+* Equipos de trabajo: [core team](http://bioconductor.org/about/core-team/);  _Advisory Boards_: [_Scientific_](http://bioconductor.org/about/scientific-advisory-board/), [_Technical_](http://bioconductor.org/about/technical-advisory-board/), [_Community_](http://bioconductor.org/about/community-advisory-board/)
+
+---
+
+# Tipos de paquetes
+
+* _Software_: principal tipo de 📦, principalmente hecho por la comunidad
+* _Annotation_: facilita el interactuar con bases de datos genómicas
+makes it easier to interface with heavily used genomics databases
+* _Experiment Data_: típicamente relacionado a un artículo o para distribuir datos para ejemplos, principalmente hecho por la comunidad
+* _Workflows_: muestran como usar varios paquetes de R/BioC para un tipo de análisis en particular
+
+
+
+---
+
+# Buscar paquetes
+
+* Software: http://bioconductor.org/packages/release/bioc/
+* Annotation: http://bioconductor.org/packages/release/data/annotation/
+* Experiment Data: http://bioconductor.org/packages/release/data/experiment/
+* Workflows: http://bioconductor.org/packages/release/workflows/
+
+
+---
+
+# Navegando los _biocViews_
+
+* Estructura como de un árbol
+* Cuatro árboles principales: software, annotation, experiment, workflow
+* Un paquete puede ser parte de varias ramas del mismo árbol
+* Búsqueda de texto sencilla
+* Ejemplo: Software → WorkflowStep → Visualization → http://bioconductor.org/packages/release/BiocViews.html#___Visualization (486 📦s en BioC 3.11)
+
+
+---
+
+# Ejercicio 1
+
+* Encuentren un paquete para analizar uso diferencial de exones (tiene que ver con _splicing_)
+* ¿Cúal es el 📦 de datos de organismo de humano más usado?
+* ¿Cúantos _workflows_ básicos hay?
+
+---
+
+# Página web principal de un 📦 de BioC
+
+* Usen https://bioconductor.org/packages/<pkg_name>.
+  - Ejemplo 1: https://bioconductor.org/packages/recount
+  - Ejemplo 2: https://bioconductor.org/packages/SummarizedExperiment
+* Etiquetas (badges): muestra rápidamente como está el 📦
+* Descripción: un párrafo
+* Cómo citar el 📦
+* Cómo instalar el 📦. Más detalles en http://bioconductor.org/install/
+* Documentación
+  - Liga al PDF o HTML para cada _vignette_. ¡Es la información **PRINCIPAL** que van a querer revisar!
+  - Es donde lxs autores explican cómo se relacionan las diferentes funciones y para que sirve el 📦.
+  
+---
+
+* Detalles
+  - términos de _biocViews_
+  - Relación con otros 📦s (depends, imports, linking to, suggests, depends on me, …)
+  - URL: donde puedes encontrar el código fuente
+  - BugReports: donde puedes pedir ayuda
+* Más detalles sobre la instalación del 📦
+* Estadísticas sobre las descargas
+
+---
+
+# Ejercicio 2
+
+* ¿Cúantas vignettes tiene _recount_?
+* Si tienen una pregunta sobre _recount_, ¿dónde pedirían ayuda?
+* _recount_ depende de otro 📦 de R, ¿cúal es, qué tan usado es? ¿Funciona en todos los sistemas operativos?
+
+---
+
+# Dos ramas (versiones) de Bioconductor
+
+* Ramas:
+  - release (versión principal), actualmente: 3.11
+  - devel (desarrollo), actualmente: 3.12
+    * Ejemplo: http://bioconductor.org/packages/devel/bioc/html/recount.html
+* Bioconductor: ciclos de 6 meses (abril y octubre)
+* Pruebas diarias en Windows, Linux y macOS en ambas ramas
+  - Ejemplo: http://bioconductor.org/checkResults/release/bioc-LATEST/recount/ y http://bioconductor.org/checkResults/devel/bioc-LATEST/recount/
+* Resumen de cada versión, actualmente 3.11: http://bioconductor.org/news/bioc_3_11_release/
+  - Resumen del resumen para 3.8: http://research.libd.org/rstatsclub/2018/11/02/quick-overview-on-the-new-bioconductor-3-8-release/
+
+---
+
+# Cursos y eventos
+
+* http://bioconductor.org/help/events/
+* http://bioconductor.org/help/course-materials/
+* BioC2020: congreso principal (será remoto este año) https://bioc2020.bioconductor.org/
+  - BioC2019 libro de los talleres: https://rebrand.ly/biocworkshops2019
+* Taller CDSB 2020: https://comunidadbioinfo.github.io/post/cdsb2020-building-workflows-with-rstudio-and-scrnaseq-with-bioconductor/#.XmJT-Z-YU1I
+  - Más sobre la CDSB a través de R Consortium: [inglés](https://www.r-consortium.org/blog/2020/03/18/cdsb-diversity-and-outreach-hotspot-in-mexico) y [español](https://comunidadbioinfo.github.io/es/post/csdb-story-of-a-diversity-and-outreach-hotspot-in-mexico/#.XwM5CpNKiuo)
+
+---
+
+# Desarrolladores
+
+https://bioconductor.org/developers/
+
+* Lista de correos para los desarrolladores
+* Git, GitHub y control de código
+* Guías/reglas para código de R
+* Contenedores de Docker
+* Amazon Machine Image
+
+---
+
+# ¿Quieren más?
+
+.scroll-output[
+.tiny[
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Are you interested in learning about storing <a href="https://twitter.com/hashtag/genomics?src=hash&amp;ref_src=twsrc%5Etfw">#genomics</a> data using <a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw">@Bioconductor</a>? <br><br>Leo <a href="https://twitter.com/fellgernon?ref_src=twsrc%5Etfw">@fellgernon</a> explained what <a href="https://twitter.com/hashtag/SummarizedExperiment?src=hash&amp;ref_src=twsrc%5Etfw">#SummarizedExperiment</a> <a href="https://twitter.com/hashtag/SingleCellExperiment?src=hash&amp;ref_src=twsrc%5Etfw">#SingleCellExperiment</a> and related <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> 📦s can do for you<br><br>📹 <a href="https://t.co/dMm2fESP1Y">https://t.co/dMm2fESP1Y</a><br>📒 <a href="https://t.co/UQl3JqZ2Cy">https://t.co/UQl3JqZ2Cy</a><br>📜 <a href="https://t.co/D2y6OyDuwg">https://t.co/D2y6OyDuwg</a> <a href="https://t.co/eXVeEISxFD">pic.twitter.com/eXVeEISxFD</a></p>&mdash; LIBD rstats club (@LIBDrstats) <a href="https://twitter.com/LIBDrstats/status/1261387752588935169?ref_src=twsrc%5Etfw">May 15, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+]]
+
+---
+
+<iframe src="https://giphy.com/embed/KYDYyfxefrS2eiKBuv" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/thanks-thank-you-respect-KYDYyfxefrS2eiKBuv">via GIPHY</a></p>
+
+---
+
+class: middle
+
+.center[
+
+# ¡Gracias!
+
+Las diapositivas fueron hechas con el paquete de R [**xaringan**](https://github.com/yihui/xaringan) y estilizadas con [**xaringanthemer**](https://github.com/gadenbuie/xaringanthemer).
+
+
+
+
+Instructor: [**Leonardo Collado-Torres**](http://lcolladotor.github.io/).
+
+<a href="https://www.libd.org"><img src="img/LIBD_logo.jpg" style="width: 20%" /></a>
+
+]
+
+.footnote[ Descarga los archivos de este curso con `usethis::use_course('lcolladotor/RBiocIntro2020')` o ve los archivos en línea a través de [**lcolladotor.github.io/RBiocIntro2020**](http://lcolladotor.github.io/RBiocIntro2020).]
+---
+
+Este mini curso está basado en 
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">For our session today Leo <a href="https://twitter.com/fellgernon?ref_src=twsrc%5Etfw">@fellgernon</a> did a <a href="https://twitter.com/Bioconductor?ref_src=twsrc%5Etfw">@Bioconductor</a> overview for <a href="https://twitter.com/LieberInstitute?ref_src=twsrc%5Etfw">@LieberInstitute</a><br><br>📜 <a href="https://t.co/51DE9Cqk2a">https://t.co/51DE9Cqk2a</a><br>📹 <a href="https://t.co/acfMoJFqvH">https://t.co/acfMoJFqvH</a><br>🌐 <a href="https://t.co/CHROt662as">https://t.co/CHROt662as</a><br><br>Leo joined the Community Advisory Board 🌟 in 04/2020<a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/Bioinformatics?src=hash&amp;ref_src=twsrc%5Etfw">#Bioinformatics</a> <a href="https://twitter.com/hashtag/Genomics?src=hash&amp;ref_src=twsrc%5Etfw">#Genomics</a> <a href="https://twitter.com/hashtag/Bioconductor?src=hash&amp;ref_src=twsrc%5Etfw">#Bioconductor</a></p>&mdash; LIBD rstats club (@LIBDrstats) <a href="https://twitter.com/LIBDrstats/status/1256289003889983488?ref_src=twsrc%5Etfw">May 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+---
+
+# Información de la sesión de R
+
+
+.scroll-output[
+.tiny[
+
+```{r 'reproducibilidad', cache = TRUE, dependson=knitr::all_labels()}
+options(width = 120)
+sessioninfo::session_info()
+```
+
+
+]]
