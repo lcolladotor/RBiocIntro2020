@@ -384,3 +384,12 @@ sessioninfo::session_info()
 
 
 ]]
+
+---
+
+.center[
+
+[<img src="https://www.redmexicanadebioinformatica.org/wp-content/uploads/2020/06/Web-banner.jpg"/>](https://www.redmexicanadebioinformatica.org/introduccion-a-r-rstudio-y-bioconductor-para-expandir-tu-horizonte-bioinformatico/)
+
+]
+
