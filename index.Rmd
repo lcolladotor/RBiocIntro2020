@@ -1,6 +1,6 @@
 ---
 title: "**Introducción a R, RStudio y Bioconductor**"
-subtitle: "para expandir tu horizonte bioinformático CDSB + RMB + NNB + EMB 2020"  
+subtitle: "para expandir tu horizonte bioinformático: CDSB + RMB + NNB + EMB 2020"  
 author: "[Leonardo Collado-Torres](http://lcolladotor.github.io/)"
 date: '`r Sys.Date()`'
 output:
